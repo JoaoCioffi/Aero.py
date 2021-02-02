@@ -1,3 +1,3 @@
 # Aero.py
 
-## Some engineering stuff using Python as solver =)
+- Just some engineering stuff using Python as solver =)
