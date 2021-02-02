@@ -138,7 +138,7 @@ class Ex1:
     def CG(self):
         """
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                            Código adaptado para:
+                           Código adaptado para:
 
                    "Introdução às Cargas nas Aeronaves"
                 
@@ -177,6 +177,7 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         cma = 1.205                     #-> corda média aerodinâmica (m)
         leading_edge_cma = 1.593        #-> pos. do bordo de ataque da cma (m)
         
+        
         #>> Tabela 1 - Componentes da Fuselagem: [Peso(kg), Braço(m)]
         t1 = np.array(([14., 1.53],     #-> F1 
                        [18., 2.28],     #-> F2
@@ -185,7 +186,6 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
                        [6., 4.63],      #-> F5
                        [4., 5.35],))    #-> F6
         
-
         #>> Tabela 2 - Componentes da Aeronave: [Peso(kg), Braço(m)]
         t2 = np.array(([.92, .29],      #-> spinner
                        [5., .29],       #-> hélice
@@ -216,7 +216,6 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
                        [104.5, .72],    #-> motor Lycoming
                        [12., 1.18],))   #-> bateria e suporte
         
-       
         #>> Tabela 3 - Equipamentos de Vôo: [Peso(kg), Braço(m)]
         t3 = np.array(([60., 2.36],     #-> piloto
                        [60., 2.36],     #-> passageiro
@@ -225,7 +224,7 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         
         #----------------------------------------
         #>> Somatório parcial (peso_i * braço_i):
-        st1, st2, st3 = np.shape(t1), np.shape(t2), np.shape(t3) #-> shape(row, column) 
+        st1, st2, st3 = np.shape(t1), np.shape(t2), np.shape(t3)
         m1, m2, m3 = [], [], []
         
         for i in range(0, st1[0]):
@@ -261,8 +260,22 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         X_cg = sum_wi_xi_total/sum_wi_total
         X_cg_cma = ((X_cg - leading_edge_cma)/(cma)) * 100
             
-        return f'\n>> Xcg = {X_cg} m\
-                 \n>> Xcg,cma = {X_cg_cma} %'
+        
+        #>> Pesos:
+        ew = t1.sum(axis=0)[0]                          #-> empty weight
+        oew = t1.sum(axis=0)[0] + t2.sum(axis=0)[0]     #-> operating empty weight
+        moew = sum_wi_total - t3.sum(axis=0)[0]         #-> minimum operating empty weight
+        mzfw = moew - t2[14][0]                         #-> minimum zero fuel weight
+        amw = sum_wi_total                               #-> aircraft weight
+        
+        return f'\n>> Xcg: {X_cg}m\
+                 \n>> Xcg,cma: {X_cg_cma}%\
+                 \n-------------------------\
+                 \n>> EW: {ew}kg\
+                 \n>> OEW: {oew}kg\
+                 \n>> MOEW: {moew}kg\
+                 \n>> MZFW: {mzfw}kg\
+                 \n>> Aircraft Maximum Weight: {amw}kg'
 
 
 res = Ex1().CG()
@@ -270,6 +283,6 @@ res = Ex1().CG()
 
 print(Ex1.CG.__doc__)
 print('\n\n', Fore.RED + Back.GREEN + Style.BRIGHT,\
-      '.::. Posição do C.G da aeronave .::.', Style.RESET_ALL, f'\n{res}')
+      '.::. Valores Obtidos .::.', Style.RESET_ALL, f'\n{res}')
 
 #--------------------------------------------------------------------------End.
