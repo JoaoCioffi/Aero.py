@@ -185,15 +185,7 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
                        [6., 4.63],      #-> F5
                        [4., 5.35],))    #-> F6
         
-        st1 = np.shape(t1)              #-> shape(row, column) 
-        
-        #>> Somatório (peso*braço):
-        m1 = []
-        for i in range(0, st1[0]):
-            m1.append(t1[i][0]*t1[i][1])
-            wi_xi_1 = sum(m1)           #-> peso_i * braço_i
-            
-        
+
         #>> Tabela 2 - Componentes da Aeronave: [Peso(kg), Braço(m)]
         t2 = np.array(([.92, .29],      #-> spinner
                        [5., .29],       #-> hélice
@@ -224,34 +216,36 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
                        [104.5, .72],    #-> motor Lycoming
                        [12., 1.18],))   #-> bateria e suporte
         
-        st2 = np.shape(t2)              #-> shape(row, column) 
-        
-        #>> Somatório (peso*braço):
-        m2 = []
-        for i in range(0, st2[0]):
-            m2.append(t2[i][0]*t2[i][1])
-            wi_xi_2 = sum(m2)           #-> peso_i * braço_i
-    
-          
+       
         #>> Tabela 3 - Equipamentos de Vôo: [Peso(kg), Braço(m)]
         t3 = np.array(([60., 2.36],     #-> piloto
                        [60., 2.36],     #-> passageiro
                        [22., 3.01],))   #-> bagagem
-                
-        st3 = np.shape(t3)              #-> shape(row, column) 
+              
         
-        #>> Somatório (peso*braço):
-        m3 = []
-        for i in range(0, st3[0]):
-            m3.append(t3[i][0]*t3[i][1])
-            wi_xi_3 = sum(m3)           #-> peso_i * braço_i
+        #----------------------------------------
+        #>> Somatório parcial (peso_i * braço_i):
+        st1, st2, st3 = np.shape(t1), np.shape(t2), np.shape(t3) #-> shape(row, column) 
+        m1, m2, m3 = [], [], []
         
+        for i in range(0, st1[0]):
+            m1.append(t1[i][0]*t1[i][1])
+            wi_xi_1 = sum(m1)                                    
         
-        #>> Soma total (peso*braço):
+        for j in range(0, st2[0]):
+            m2.append(t2[j][0]*t2[j][1])
+            wi_xi_2 = sum(m2)                                    
+            
+        for k in range(0, st3[0]):
+            m3.append(t3[k][0]*t3[k][1])
+            wi_xi_3 = sum(m3)                                    
+        
+        #>> Somatório total (peso_i * braço_i)
         sum_wi_xi_total = wi_xi_1 + wi_xi_2  + wi_xi_3
         
         
-        #>> Soma total dos pesos:
+        #----------------------------------------
+        #>> Somatório dos pesos:
         sum_weight_per_table = np.array(([t1.sum(axis=0)],
                                          [t2.sum(axis=0)],
                                          [t3.sum(axis=0)],))
@@ -262,15 +256,11 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         sum_wi_total = sum_values[0][0]
         
         
+        #----------------------------------------
         #>> Cálculo da posição do CG (em x):
         X_cg = sum_wi_xi_total/sum_wi_total
-        
-        
-        #>> Cálculo da posição do CG (em x) em termos % da corda média aerodinâmica:
         X_cg_cma = ((X_cg - leading_edge_cma)/(cma)) * 100
             
-        
-        #return f'{sum_weight_per_table} {sum_values}'
         return f'\n>> Xcg = {X_cg} m\
                  \n>> Xcg,cma = {X_cg_cma} %'
 
