@@ -266,7 +266,7 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         oew = t1.sum(axis=0)[0] + t2.sum(axis=0)[0]     #-> operating empty weight
         moew = sum_wi_total - t3.sum(axis=0)[0]         #-> minimum operating empty weight
         mzfw = moew - t2[14][0]                         #-> minimum zero fuel weight
-        amw = sum_wi_total                               #-> aircraft weight
+        amw = sum_wi_total                              #-> aircraft weight
         
         return f'\n>> Xcg: {X_cg}m\
                  \n>> Xcg,cma: {X_cg_cma}%\
