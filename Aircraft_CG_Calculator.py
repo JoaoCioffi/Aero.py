@@ -192,7 +192,7 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         
         st1 = np.shape(t1)
         for j in range (0, st1[0]):
-            t1[j][0] *= self.__g        #-> conversão: kg to kgf
+            t1[j][0] *= self.__g        #-> kg to kgf
         
         
         #>> Tabela 2 - Componentes da Aeronave: [Massa(kg), Braço(m)]
@@ -227,7 +227,7 @@ tomada com relação ao bordo de ataque: X_cg,cma = (X_cg - X_cma) * 100 ,
         
         st2 = np.shape(t2)
         for j in range (0, st2[0]):
-            t2[j][0] *= self.__g        #-> conversão: kg to kgf
+            t2[j][0] *= self.__g        #-> kg to kgf
         
         #>> Tabela 3 - Equipamentos de Vôo: [Peso(kgf), Braço(m)]
         t3 = np.array(([60., 2.36],     #-> piloto
