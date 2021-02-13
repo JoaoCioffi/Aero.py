@@ -1,4 +1,4 @@
-## Aero.py ✈
+## Aero.py 
 
 - Just some engineering stuff using Python as solver :)
 - Contents:
