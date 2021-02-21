@@ -1,13 +1,13 @@
 import numpy as np
-from math import pi as pi,     \
-                 sqrt as sqrt, \
-                 cos as cos,   \
-                 sin as sin
+from math import (pi as pi,
+                 sqrt as sqrt,
+                 cos as cos,
+                 sin as sin)
 
 #------------------------------------------------------------------------------
 
-class Lista5:
-    def __init__(self, vertices_painel_data,vertices_anel_data,pontos_controle_data):
+class VLM:
+    def __init__(self, vertices_painel_data, vertices_anel_data, pontos_controle_data):
         self.__vp = vertices_painel_data    #-> coord. vértices de cada painel
         self.__va = vertices_anel_data      #-> coord. vértices de cada anel
         self.__pc = pontos_controle_data    #-> coord. pontos de controle
@@ -81,8 +81,8 @@ class Lista5:
                          [(r3[0]*r4[1]) - (r3[1]*r4[0])],))     #-> r3 x r4
             
         pv41 = np.array(([(r4[1]*r1[2]) - (r4[2]*r1[1])],
-                             [(r4[2]*r1[0]) - (r4[0]*r1[2])],
-                             [(r4[0]*r1[1]) - (r4[1]*r1[0])],)) #-> r4 x r1
+                         [(r4[2]*r1[0]) - (r4[0]*r1[2])],
+                         [(r4[0]*r1[1]) - (r4[1]*r1[0])],))     #-> r4 x r1
          
         
         #>> Módulo do Produto Vetorial:
@@ -111,16 +111,16 @@ class Lista5:
          
         
         #>> Equação do Cnk:
-        zeta = (1/(4*pi)) * (((mod_pv12**2) * ((pe121/mod_r1) - (pe122/mod_r2)))\
-                          +  ((mod_pv23**2) * ((pe232/mod_r2) - (pe233/mod_r3)))\
-                          +  ((mod_pv34**2) * ((pe343/mod_r3) - (pe344/mod_r4)))\
-                          +  ((mod_pv41**2) * ((pe414/mod_r4) - (pe411/mod_r1))))
+        zeta = (1/(4*pi)) * ( ((1/(mod_pv12**2)) * ((pe121/mod_r1) - (pe122/mod_r2))) \
+                          +   ((1/(mod_pv23**2)) * ((pe232/mod_r2) - (pe233/mod_r3))) \
+                          +   ((1/(mod_pv34**2)) * ((pe343/mod_r3) - (pe344/mod_r4))) \
+                          +   ((1/(mod_pv41**2)) * ((pe414/mod_r4) - (pe411/mod_r1))) )
         
-        matriz_global_user = np.array(([pv12[0] + pv23[0] + pv34[0] + pv41[0]],\
+        global_array_user = np.array(([pv12[0] + pv23[0] + pv34[0] + pv41[0]],\
                                        [pv12[1] + pv23[1] + pv34[1] + pv41[1]],\
-                                       [pv12[2] + pv23[2] + pv34[2] + pv41[2]]))
+                                       [pv12[2] + pv23[2] + pv34[2] + pv41[2]],))
         
-        Cnk = zeta*matriz_global_user
+        Cnk = zeta*global_array_user
         
         
         Cnk = {'x: ':float(Cnk[0]), 'y: ':float(Cnk[1]), 'z: ':float(Cnk[2])}
@@ -130,12 +130,12 @@ class Lista5:
         for key, value in Cnk.items():
             print(f'{key}{value}')
         
-        del n, k, pc, va,   \
-            r1, r2, r12,    \
-            pv12, mod_pv12, \
-            pe121, pe122,   \
-            mod_r1, mod_r2, \
-            zeta, matriz_global_user
+        del (n, k, pc, va,
+            r1, r2, r12,
+            pv12, mod_pv12,
+            pe121, pe122,
+            mod_r1, mod_r2,
+            zeta, global_array_user)
             
         return Cnk
         
@@ -146,7 +146,7 @@ class Lista5:
     def horseshoe_vortex(self):
         """
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-         Fator de influência do vórtice da esteira de um painel 'k'
+         Fator de influência do vórtice ferradura de um painel 'k'
                  sobre o ponto de controle de um painel 'n'
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         """
@@ -166,7 +166,7 @@ class Lista5:
         print('>> Seja o ângulo de ataque do escoamento livre (desconsiderando vento lateral):')
         alpha = float(input('Insira ângulo de ataque, alpha(°) -> '))
         def deg2rad(alpha):
-            c = pi/180                                          #-> fator de conversão
+            c = pi/180     #-> fator de conversão
             return alpha*c
         alpha = deg2rad(alpha)
         e_infty = (cos(alpha), 0., sin(alpha))
@@ -181,11 +181,20 @@ class Lista5:
                        [pc[2] - va[8]],                         #-> em y
                        [pc[3] - va[9]],))                       #-> em z
         
-        r12 = np.array(([r1[0] - r2[0]],
-                        [r1[1] - r2[1]],
-                        [r1[2] - r2[2]]),) * (-1)               #-> array anterior: -(r4-r3)
+        r3 = np.array(([pc[1] - va[7]],                         #-> em x
+                       [pc[2] - va[8]],                         #-> em y
+                       [pc[3] - va[9]],))                       #-> em z
         
-        r12 = r12 * (-1)                                        #-> r12(atual) = -r34(anterior)
+        r4 = np.array(([pc[1] - va[10]],                        #-> em x
+                       [pc[2] - va[11]],                        #-> em y
+                       [pc[3] - va[12]],))                      #-> em z
+        
+        r34 = np.array(([r4[0] - r3[0]],
+                        [r4[1] - r3[1]],
+                        [r4[2] - r3[2]]),) * (-1)               #-> array: -(r4-r3)
+        
+        
+        r12 = r34 * (-1)                                        #-> r12(atual) = -r34(anterior)
         
         
         #>> Produto Vetorial:
@@ -226,13 +235,13 @@ class Lista5:
         eta =  float( ((pe121/mod_r1)-(pe122/mod_r2))*(1/(4*pi*(mod_pv12**2))) )
         
         
-        matriz_global_user = np.array(([pve2[0] + pve1[0] + pv12[0]],\
-                                       [pve2[1] + pve1[1] + pv12[1]],\
-                                       [pve2[2] + pve1[2] + pv12[2]]))
+        global_array_user = np.array(([pve2[0] + pve1[0] + pv12[0]],\
+                                      [pve2[1] + pve1[1] + pv12[1]],\
+                                      [pve2[2] + pve1[2] + pv12[2]]))
         
-        Cnk = ((zeta*matriz_global_user[0]) - (xi*matriz_global_user[0]) + eta*matriz_global_user[0],\
-               (zeta*matriz_global_user[1]) - (xi*matriz_global_user[1]) + eta*matriz_global_user[1],\
-               (zeta*matriz_global_user[2]) - (xi*matriz_global_user[2]) + eta*matriz_global_user[2])
+        Cnk = ((zeta*global_array_user[0]) - (xi*global_array_user[0]) + eta*global_array_user[0],\
+               (zeta*global_array_user[1]) - (xi*global_array_user[1]) + eta*global_array_user[1],\
+               (zeta*global_array_user[2]) - (xi*global_array_user[2]) + eta*global_array_user[2])
         
         Cnk = {'x: ':float(Cnk[0]), 'y: ':float(Cnk[1]), 'z: ':float(Cnk[2])}
         print(f'\n\n>> Fator de influência do vórtice ferradura do painel {k} sobre o ponto de controle do painel {n} para alpha = {alpha*180/pi}°:')
@@ -322,17 +331,23 @@ N     x       y       z
 """
 
 #------------------------------------------------------------------------------
+print('\n\n')
+print('<_________________>')
+print('|   Ring Vortex   |')
+print('<_________________>')
+print(VLM.ring_vortex.__doc__)
+ans_ringvortex = VLM(vertices_painel_data,\
+                     vertices_anel_data,\
+                     pontos_controle_data).ring_vortex()
 
-print(Lista5.ring_vortex.__doc__)
-ans1 = Lista5(vertices_painel_data,\
-              vertices_anel_data,\
-              pontos_controle_data).ring_vortex()
-
-print('\n')
     
-print(Lista5.horseshoe_vortex.__doc__)
-ans2 = Lista5(vertices_painel_data,\
-              vertices_anel_data,\
-              pontos_controle_data).horseshoe_vortex()
+print('\n\n')
+print('<______________________>')
+print('|   Horseshoe Vortex   |')
+print('<______________________>')
+print(VLM.horseshoe_vortex.__doc__)
+ans_horseshoevortex = VLM(vertices_painel_data,\
+                          vertices_anel_data,\
+                          pontos_controle_data).horseshoe_vortex()
     
 #--------------------------------------------------------------------------End.
