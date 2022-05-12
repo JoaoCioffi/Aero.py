@@ -2,4 +2,4 @@
 
 - Just some engineering stuff using Python and Matlab as solvers :)
 
-[![GitLab last commit](https://badgen.net/gitlab/last-commit/NickBusey/HomelabOS/)](https://gitlab.com/NickBusey/HomelabOS/-/commits)
+[![GitLab last commit](https://badgen.net/gitlab/last-commit/NickBusey/HomelabOS/)](https://gitlab.com/JoaoCioffi/Aero.py/-/commits)
