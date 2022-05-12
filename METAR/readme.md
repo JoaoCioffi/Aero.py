@@ -9,3 +9,40 @@ The IEM maintains an ever growing archive of automated airport weather observati
 * **ASOS User's Guide:** https://www.weather.gov/media/asos/aum-toc.pdf
 
 *  **Tools/Libaries:** Here (https://github.com/akrherz/iem/blob/main/scripts/asos/iem_scraper_example.py) is a python script example  that automates the download of data from this interface. A community user has contributed R language  version of the python script. There is also a riem R package  allowing for easy access to this archive.
+
+---
+> Decoder:
+
+```
+Q     - Pressão barométrica - 0
+----------------------------------------
+FEW   - Poucas - 100
+SCT   - Esparsa - 101
+BKN   - Nublado - 110
+OVC   - Encoberto - 111
+----------------------------------------
+CB    - Cumulunimbus - 99
+TCU   - Towering cumulus - 999
+NSC   - No significative clouds - 912
+CAVO (CAVOK) - Clouds and visibility OK - 9123
+----------------------------------------------
+V     - 1
+RE    - Recente - 11
+VC    - Vizinhança - 12
+TS    - Trovoada - 38
+RETS  - Recente trovoada - 1138
+BR    - Névoa úmida - 70 
+DZ    - Chuvisco - 71
+RA    - Chuva - 77
+SH    - Chuva - 77
+VCSH  - Vicinity Showers - 1277
+HZ    - Névoa seca - 78
+FG    - Nevoeiro - 79
+RERA  - Recente chuva - 1177
+TSRA  - Trovoada com chuva - 3877
+----------------------------------------------
+WS    - Windshear - 69
+GXX   - Rajada velocidade XX - 6XX
+NIL   - No item listed - 000
+```
+---
