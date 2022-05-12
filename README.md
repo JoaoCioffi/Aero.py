@@ -2,4 +2,4 @@
 
 - Just some engineering stuff using Python and Matlab as solvers :)
 
-[![GitLab last commit](https://badgen.net/gitlab/last-commit/JoaoCioffi/Aero.py/)](https://gitlab.com/JoaoCioffi/Aero.py/commits)
+[![GitLab last commit](https://badgen.net/gitlab/last-commit/JoaoCioffi/Aero.py)](https://gitlab.com/JoaoCioffi/Aero.py/commits)
