@@ -54,7 +54,7 @@ NIL   - No item listed - 000
 ---
 > **Metadata:**
 ---
->> * **station:**
+* **station:**
 three or four character site identifier
 * **valid:**
 timestamp of the observation
