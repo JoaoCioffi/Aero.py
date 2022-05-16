@@ -1,0 +1,12 @@
+pandas
+seaborn
+numpy
+category-encoders
+streamlit
+scikit-learn
+imbalanced-learn
+plotly
+tpot
+jupyter
+shap
+yellowbrick
