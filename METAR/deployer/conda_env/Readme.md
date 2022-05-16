@@ -1,4 +1,4 @@
-# Conda cmds:
+# 💻 Conda cmds 💻
 > Run with Powershell or via prompt:
 ```
 conda create -n environment_name
