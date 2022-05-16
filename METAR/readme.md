@@ -115,9 +115,8 @@ unprocessed reported observation in METAR format
 
 ---
 > **Obs:** for *Sky Coverage* values:
->> - **FEW**   -  few clouds
+- **FEW**   -  few clouds
 - **SCT**   - sparse
 - **BKN**   - cloudy
 - **OVC**   - overcast
-
 ---
