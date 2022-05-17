@@ -25,14 +25,55 @@ heroku create
 
 By default, this will make an app with a random name. If you want to choose your own name, simply pass it as an argument. For example:
 ```
-heroku create bike-model
+heroku create your-model-name
 ```
 
 ## Create the required Heroku files
 You will need two files, placed inside the webapp folder.
 
-1- requirements.txt - this tells Heroku which packages to install for your web app. It should look like this:
+1. requirements.txt - this tells Heroku which packages to install for your web app. It should look like this:
 - flask
 - pandas
 - gunicorn
 - xgboost
+
+2. Procfile - this tells Heroku what kind of app you are running and how to serve it to users. It is a single line and should look like this:
+```
+web: gunicorn app:app
+```
+Your web app folder should now look like this:
+```
+webapp/
+    ├── model/
+    │   └── your_model.pkl
+    ├── templates/
+    │   └── main.html
+    ├── requirements.txt
+    ├── Procfile
+    └── app.py
+```
+
+## Add files to repository
+While in the webapp folder, use the following command to add all your web app's files to the git repository:
+```
+git add .
+git commit -m "First commit!"
+```
+
+## Set the remote destination for pushing from git to Heroku
+
+This command makes it easier to push your local web app to Heroku, using git. You should change bike-model to whatever you named your Heroku app when you created it.
+
+```
+heroku git:remote -a your-model-name
+```
+
+## Push your app to the web
+
+Just one more command and your web app will be online. During this process, Heroku will upload your app files, install the packages it needs and start the app running.
+
+```
+git push heroku master
+```
+
+If everything goes as expected, you’ll see output showing things being installed and uploaded.
