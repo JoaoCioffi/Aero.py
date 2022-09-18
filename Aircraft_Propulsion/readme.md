@@ -1,6 +1,6 @@
 # Aircraft Propulsion
 
-## References 
+## References 📚
 - EL-SAYED, A. F. Aircraft Propulsion and Gas Turbine Engines. 2a ed. Boca Raton: CRC Press, 2017.
 - FAROKHI, S. Aircraft Propulsion. 2a ed. Chichester: Wiley, 2014.
 - MATTINGLY, J. D.; OHAIN, H. V. Elements of Propulsion: Gas Turbine and Rockets. 2a ed. Reston: AIAA Educational Series, 2006.
