@@ -16,38 +16,77 @@ class Booking():
 
     def acceptCookies(self):
         try:
-            acceptElement = self.driver.find_element(By.CSS_SELECTOR,'button[data-testid="cookieBanner-confirmButton"]')
+            acceptElement = self.driver.find_element(
+                By.CSS_SELECTOR,
+                'button[data-testid="cookieBanner-confirmButton"]'
+                )
             print('\nThis website uses cookies.\n')
             acceptElement.click()
         except:
             print('\nNo cookies elements were found. Skipping...\n')
     
     def selectDeparture(self,departureLocation):
-        search_field = self.driver.find_element(By.ID,'searchForm-singleBound-origin-input')
+        search_field = self.driver.find_element(
+            By.ID,
+            'searchForm-singleBound-origin-input'
+            )
         search_field.clear() #clears text if already filled
 
         print('\n>> Sending Keys...')
         search_field.send_keys(departureLocation)
         print(f'\n * Selected Departure Location : {departureLocation} ✈︎\n')
 
-        depLocationFirstResult = self.driver.find_element(By.ID,'react-select-2-option-0')
+        depLocationFirstResult = self.driver.find_element(
+            By.ID,
+            'react-select-2-option-0'
+            )
         depLocationFirstResult.click()
 
     
     def selectArrival(self,arrivalLocation):
-        search_field = self.driver.find_element(By.ID,'searchForm-singleBound-destination-input')
+        search_field = self.driver.find_element(
+            By.ID,
+            'searchForm-singleBound-destination-input'
+            )
         search_field.clear() #clears text if already filled
 
         print('\n>> Sending Keys...')
         search_field.send_keys(arrivalLocation)
         print(f'\n * Selected Arrival Location : {arrivalLocation} ✈︎\n')
 
-        arrFirstResult = self.driver.find_element(By.ID,'react-select-3-option-0')
+        arrFirstResult = self.driver.find_element(
+            By.ID,
+            'react-select-3-option-0'
+            )
         arrFirstResult.click()
 
-    def searchCalendar(self,departureDate=None,arrivalDate=None):
-        departureDateField = self.driver.find_element(By.ID,'singleBound.departureDate')
+    def searchCalendar(self,departureDate,arrivalDate):
+
+        # Defining departure parameters:
+        departureDateField = self.driver.find_element(
+            By.ID,
+            'singleBound.departureDate'
+            )
         departureDateField.click()
+        departureDateElement = self.driver.find_element(
+            By.CSS_SELECTOR, 
+            f'div[class="Day-Picker-Day"]/div[aria-label="{departureDate}"]' # expected format: 'Tue Sep 20 2022'
+        )
+        departureDateElement.click()
+
+        # Defining arrival paramenters:
+        arrivalDateField = self.driver.find_element(
+            By.ID,
+            'singleBound.returnDate'
+        )
+        arrivalDateField.click()
+        arrivalDateElement = self.driver.find_element(
+            By.CSS_SELECTOR,
+            f'div[class="Day-Picker-Day"]/div[aria-label="{arrivalDate}"]' # expected format: 'Tue Sep 20 2022'
+        )
+        departureDateElement.click()
+
+
 
     def __exit__(self):
         if self.driver.teardown:
