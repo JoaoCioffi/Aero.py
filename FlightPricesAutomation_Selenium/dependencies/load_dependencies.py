@@ -9,5 +9,4 @@ def findDriverExecutable(filename='msedgedriver.exe',path=filesPath):
     os.chdir(filesPath)
     driver = webdriver.Edge() # in web browser (edge), type: edge://version/ --> Make sure you're using the same version of your browser
     os.chdir(absPath)
-
     return driver
