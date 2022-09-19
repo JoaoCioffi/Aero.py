@@ -1,6 +1,8 @@
 from methods import Booking
-from dependencies import load_dependencies as ld
 
-def invokeBotActions(arg=Booking()):
-    action = arg.land_first_page()
-    return action
+def invokeBotActions(callMethod=Booking()):
+    actions = {'land_first_page':callMethod.land_first_page(),
+               'accept_cookies_if_exists':callMethod.acceptCookies(),
+               'departure':callMethod.selectDeparture(departureLocation='Los Angeles'),
+               'arrival':callMethod.selectArrival(arrivalLocation='São Paulo')}
+    return actions

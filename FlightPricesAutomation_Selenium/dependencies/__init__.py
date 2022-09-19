@@ -1,1 +1,1 @@
-print('Running script...')
+print('\n>> Running script...')
