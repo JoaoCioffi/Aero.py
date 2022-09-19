@@ -30,8 +30,9 @@ class Booking():
         search_field.send_keys(departureLocation)
         print(f'\n * Selected Departure Location : {departureLocation} ✈︎\n')
 
-        first_result = self.driver.find_element(By.ID,'react-select-2-option-0')
-        first_result.click()
+        depLocationFirstResult = self.driver.find_element(By.ID,'react-select-2-option-0')
+        depLocationFirstResult.click()
+
     
     def selectArrival(self,arrivalLocation):
         search_field = self.driver.find_element(By.ID,'searchForm-singleBound-destination-input')
@@ -41,8 +42,12 @@ class Booking():
         search_field.send_keys(arrivalLocation)
         print(f'\n * Selected Arrival Location : {arrivalLocation} ✈︎\n')
 
-        first_result = self.driver.find_element(By.ID,'react-select-3-option-0')
-        first_result.click()
+        arrFirstResult = self.driver.find_element(By.ID,'react-select-3-option-0')
+        arrFirstResult.click()
+
+    def searchCalendar(self,departureDate=None,arrivalDate=None):
+        departureDateField = self.driver.find_element(By.ID,'singleBound.departureDate')
+        departureDateField.click()
 
     def __exit__(self):
         if self.driver.teardown:
