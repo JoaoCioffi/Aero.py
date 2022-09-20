@@ -60,6 +60,8 @@ class Booking():
             )
         arrFirstResult.click()
 
+
+    """ ---// UNDER DEVELOPMENT //---
     def searchCalendar(self,departureDate,arrivalDate):
 
         # Defining departure parameters:
@@ -84,7 +86,8 @@ class Booking():
             By.CSS_SELECTOR,
             f'div[class="Day-Picker-Day"]/div[aria-label="{arrivalDate}"]' # expected format: 'Tue Sep 20 2022'
         )
-        departureDateElement.click()
+        arrivalDateElement.click()
+    """
 
 
 

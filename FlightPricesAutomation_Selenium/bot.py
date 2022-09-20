@@ -5,5 +5,6 @@ def invokeBotActions(callMethod=Booking()):
                'accept_cookies_if_exists':callMethod.acceptCookies(),
                'departure':callMethod.selectDeparture(departureLocation='Los Angeles'),
                'arrival':callMethod.selectArrival(arrivalLocation='São Paulo'),
-               'selectDates':callMethod.searchCalendar(departureDate='Wed Sep 21 2022',arrivalDate='Thu Sep 22 2022')}
+               # 'selectDates':callMethod.searchCalendar(departureDate='Wed Sep 21 2022',arrivalDate='Thu Sep 22 2022') # Under Development
+               }
     return actions
