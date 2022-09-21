@@ -8,6 +8,6 @@ def invokeBotActions(callMethod=Booking()):
                # 'selectDates':callMethod.searchCalendar(departureDate='Wed Sep 21 2022',arrivalDate='Thu Sep 22 2022') # Under Development
                'direct_flights_only':callMethod.directFlightsOnly(checkbox=False),
                'click_search_button':callMethod.searchFlights(),
-               'filters':callMethod.toggleFilters(filters=True)
+               'filters':callMethod.callFilters(active=True)
                }
     return actions

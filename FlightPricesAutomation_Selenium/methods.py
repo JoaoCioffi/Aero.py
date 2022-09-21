@@ -1,6 +1,7 @@
 from dependencies import constants as const,\
                          load_driver as ld
 from selenium.webdriver.common.by import By
+from filters import Filters
 
 class Booking():
 
@@ -108,13 +109,23 @@ class Booking():
         print('\n>> Searching results...\n')
         searchButton.click()
 
-    def toggleFilters(self,filters=False):
-        if filters == True:
+    def callFilters(self,active=False,filterOptions={'airlines':[]}):
+        import re
+        if active == True:
             filtersButton = self.driver.find_element(
                 By.CSS_SELECTOR,
                 'button[data-testid="resultPage-toggleFiltersButton-button"'
             )
             filtersButton.click()
+
+            #appliedFilters = Filters(driver=self)  # ---// UNDER DEVELOPMENT //--- #
+            
+            countFilteredResults = int(re.sub("[^\w' ]", "",self.driver.find_element(
+                By.CSS_SELECTOR,
+                'span[class="css-1q7o3zb e19cul220"'
+                ).text).split()[0])
+            print(f'\n>> Showing {countFilteredResults} results.\n')
+            
 
     def __exit__(self):
         if self.driver.teardown:
