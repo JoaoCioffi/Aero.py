@@ -118,7 +118,24 @@ class Booking():
             )
             filtersButton.click()
 
-            #appliedFilters = Filters(driver=self)  # ---// UNDER DEVELOPMENT //--- #
+            # appliedFilters = Filters(driver=self)  # ---// UNDER DEVELOPMENT //--- #
+
+            # availableAirlinesDiv = self.driver.find_elements(
+            # By.CSS_SELECTOR,
+            # 'div[data-testid="resultPage-AIRLINESFilter-content"'
+            # )
+
+            airlinesClass = self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    'li[class="css-swohae epwz15m3"'
+                )
+
+            for c in airlinesClass:
+                airlinesDiv = self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    'div[class="_3n3vnt0"]'
+                )
+                print(airlinesDiv.get_attribute("id"))
             
             countFilteredResults = int(re.sub("[^\w' ]", "",self.driver.find_element(
                 By.CSS_SELECTOR,
