@@ -114,13 +114,13 @@ void loop()
     analogWrite(YellowLed, glow);
     digitalWrite(RedLed, LOW);
     
-      
+		
     Serial.print("\t Temperatura (C): ");
   	Serial.println(valueTmpCelsius); 
     Serial.println("\t Status: CAUTION!");
     delay(200);      
       
-
+		
     //Exibindo o Status
 	lcd.clear();  //limpa o display do LCD.      
 	lcd.print("Temp.(\xB0""C): ");  //imprime o valor temperatura no display.                 
@@ -147,9 +147,8 @@ void loop()
     delay(ResponseTime);
     digitalWrite(RedLed,LOW);
     delay(ResponseTime);
-      
- 
-         
+
+	    
     Serial.print("\t Temperatura (C): ");
   	Serial.println(valueTmpCelsius); 
     Serial.println("\t OVERHEAT!");
