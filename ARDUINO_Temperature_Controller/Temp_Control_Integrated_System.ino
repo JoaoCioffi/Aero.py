@@ -178,7 +178,6 @@ void loop()
     Serial.println("\t RESET IF TEMP.<15");
     delay(200);      
       
-
     //Exibindo o Status
 	lcd.clear();  //limpa o display do LCD.  
     lcd.setCursor(0, 0);
