@@ -7,7 +7,6 @@ pi = np.pi
 sin = np.sin
 cos = np.cos
 
-
 tic = time.perf_counter()
 #%% Funções:
     
