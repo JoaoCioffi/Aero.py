@@ -122,7 +122,6 @@ class VLM:
         
         Cnk = zeta*global_array_user
         
-        
         Cnk = {'x: ':float(Cnk[0]), 'y: ':float(Cnk[1]), 'z: ':float(Cnk[2])}
         print(f'\n\n>> Fator de influência do vórtice anel do painel {k} sobre o ponto de controle do painel {n}:')
         print(f'\n\t\t(C{n}{k})')
@@ -138,7 +137,6 @@ class VLM:
             zeta, global_array_user)
             
         return Cnk
-        
     
     #///////////////////////////////////////////////////////////
     #||          Influência de um Vórtice Ferradura           ||          
