@@ -36,7 +36,6 @@ def dif1(u0,u1,dx):
     dfdx1 = (u1-u0)/dx
     return dfdx1
 
-
 #>> Esquema 02:
 def dif2(u0,u2,dx):
     dfdx2 = (u2-u0)/(2*dx)
