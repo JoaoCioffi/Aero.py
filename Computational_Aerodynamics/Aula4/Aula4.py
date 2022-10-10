@@ -30,7 +30,6 @@ def derivative(f,a,method,h):
     else:
         raise Exception
 
-
 #>> Esquema 01:
 def dif1(u0,u1,dx):
     dfdx1 = (u1-u0)/dx
@@ -40,7 +39,6 @@ def dif1(u0,u1,dx):
 def dif2(u0,u2,dx):
     dfdx2 = (u2-u0)/(2*dx)
     return dfdx2
-
 
 #>> Esquema 03:
 def dif3(u0,u1,u2,u3,dx):
