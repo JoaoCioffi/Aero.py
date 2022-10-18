@@ -275,6 +275,4 @@ plt.title('.::. Forma Deformada e Indeformada da Estrutura .::.')
 plt.xlabel('X\n[mm]')
 plt.ylabel('Y\n[mm]')
     
-    
-    
 #--------------------------------------------------------------------------End.
