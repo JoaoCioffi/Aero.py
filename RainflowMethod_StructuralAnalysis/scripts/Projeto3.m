@@ -34,27 +34,27 @@ Valleys = Data(find_valley,1); %Valley values in Data array
 %
 Peaks_Valleys = [Peaks Valleys]; %Matriz Picos e Vales
 %
-%TabulaÁ„o das PosiÁıes: Picos x Vales : 
+%Tabula√ß√£o das Posi√ß√µes: Picos x Vales : 
 fprintf('\n')
 fprintf('\t -------------------------------------------------------------')
 fprintf('\n')
-fprintf('\t\t\t .::. TabulaÁ„o Considerando Picos e Vales .::.')
+fprintf('\t\t\t .::. Tabula√ß√£o Considerando Picos e Vales .::.')
 fprintf('\n')
 fprintf('\n')
 Tabulation_Peaks_Valleys = array2table(Peaks_Valleys,...
     'VariableNames',{'Picos','Vales'});
 disp(Tabulation_Peaks_Valleys);
 %
-%% RAINFLOW - IMPLEMENTA«√O 
-%FunÁ„o Rainflow: Baseado no modelo ASTM E1049-85(2017), porÈm considera o rainflow "completo"
+%% RAINFLOW - IMPLEMENTA√á√ÉO 
+%Fun√ß√£o Rainflow: Baseado no modelo ASTM E1049-85(2017), por√©m considera o rainflow "completo"
 [c,hist,edges,rmm,idx] = rainflow(Data); %Compute cycle counts for Data. Display the matrix of cycle counts.
-c(:,1)=c(:,1).*2; %AproximaÁ„o para o mÈtodo de ocorrÍncias, i.e, considera o rainflow "simplificado"
+c(:,1)=c(:,1).*2; %Aproxima√ß√£o para o m√©todo de ocorr√™ncias, i.e, considera o rainflow "simplificado"
 %
-%TabulaÁ„o Rainflow : 
+%Tabula√ß√£o Rainflow : 
 fprintf('\n')
 fprintf('\t -------------------------------------------------------------')
 fprintf('\n')
-fprintf('\t\t\t .::. TabulaÁ„o do MÈtodo Rainflow .::.')
+fprintf('\t\t\t .::. Tabula√ß√£o do M√©todo Rainflow .::.')
 fprintf('\n')
 fprintf('\n')
 fprintf('\n')
@@ -67,11 +67,11 @@ histogram('BinEdges',edges','BinCounts',sum(hist,2))
 xlabel('Stress Range')  
 ylabel('Cycle Counts')
 %
-%% C¡LCULO DE VIDA ⁄TIL:
+%% C√ÅLCULO DE VIDA √öTIL:
 %
 %--------------------------------------------------------------------------
 %
-%                   // Outputs MÈtodo Rainflow //
+%                   // Outputs M√©todo Rainflow //
 ll = 1:1:Size_Rainflow_Sample(1,1);
 %
 Cycle_Count_Table = Rainflow_Sample(ll,1); %Forma Tabular
@@ -91,7 +91,7 @@ End_Array = End_Table{:,:}; %Converte a Forma Tabular em Array
 %
 %--------------------------------------------------------------------------
 %
-%                            // Tensıes //
+%                            // Tens√µes //
 Sigma_Max_Array = (Mean_Array + Range_Array); %Forma Array
 Sigma_Max_Table = array2table(Sigma_Max_Array); %Converte a Forma Array em Tabular
 %
@@ -114,14 +114,14 @@ Sigma_eq_SWT_Table = array2table(Sigma_eq_SWT_Array); %Converte a Forma Array em
 %
 %--------------------------------------------------------------------------
 %
-%             // Palmgren Miner: N˙mero de Ciclos p/ falhar // 
+%             // Palmgren Miner: N√∫mero de Ciclos p/ falhar // 
 %
 N = Cycle_Count_Array;
 Array_Pgm = [Sigma_Min_Array Sigma_Max_Array R_Array Sigma_eq_SWT_Array N]; %Array dados Palmgren Miner
 fprintf('\n')
 fprintf('\t -------------------------------------------------------------')
 fprintf('\n')
-fprintf('\t\t\t .::. TabulaÁ„o Palmgren Miner .::.')
+fprintf('\t\t\t .::. Tabula√ß√£o Palmgren Miner .::.')
 fprintf('\n')
 fprintf('\n')
 fprintf('\n')
@@ -132,32 +132,32 @@ fprintf('\n')
 %              log(N)=11.10-3.97log(S-15.8): Al 2024-T3
 %
 Sigma_u = 72; %ultimate tensile strength [ksi] for Al 2024-T3
-FS = 1.5; %Fator de SeguranÁa
+FS = 1.5; %Fator de Seguran√ßa
 Limit_Clipping = Sigma_u*FS;
 Limit_Truncation = 15.8;
 %
 i=1:1:Size_Sigma_eq_SWT_Array(1,1);
 %
-%Clipping: Desprezar tensıes maiores que Sigma_u*FS
-%Truncamento: Desprezar tensıes menores de 15.8 ksi (valor retirado da equaÁ„o da curva S-N do material)
+%Clipping: Desprezar tens√µes maiores que Sigma_u*FS
+%Truncamento: Desprezar tens√µes menores de 15.8 ksi (valor retirado da equa√ß√£o da curva S-N do material)
 %
-j = find(Sigma_eq_SWT_Array(i,1) > Limit_Truncation & Sigma_eq_SWT_Array(i,1) < Limit_Clipping); %posiÁıes de Sigma_eq_SWT_Array que atendem ‡s restriÁıes de clipagem e truncamento
+j = find(Sigma_eq_SWT_Array(i,1) > Limit_Truncation & Sigma_eq_SWT_Array(i,1) < Limit_Clipping); %posi√ß√µes de Sigma_eq_SWT_Array que atendem √†s restri√ß√µes de clipagem e truncamento
 %
 Sigma_eq_SWT_Array_Remastered = Sigma_eq_SWT_Array(j,Size_Sigma_eq_SWT_Array(1,2));
 N_Remastered = N(j,1);
 %
 % ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
-%Painel InteiriÁo:
+%Painel Inteiri√ßo:
 Nf_Painel_Inteiro = 10 .^ (11.1 - (3.97.*log10(Sigma_eq_SWT_Array_Remastered - 15.8)) ); %Curva S Vs. log(N): Al 2024-T3
-N_Nf_Painel_Inteiro = N_Remastered./Nf_Painel_Inteiro; %Raz„o N/Nf Palmgren Miner
+N_Nf_Painel_Inteiro = N_Remastered./Nf_Painel_Inteiro; %Raz√£o N/Nf Palmgren Miner
 %
 D_Painel_Inteiro = sum(N_Nf_Painel_Inteiro);
-Number_of_Cycles_to_Fail_Painel_Inteiro = real(1/D_Painel_Inteiro); %N˙mero de Ciclos GAG (ou Voos) atÈ a falha
-Hours_to_Fail_Painel_Inteiro = real(Number_of_Cycles_to_Fail_Painel_Inteiro * Horas_Voo); %Quantidade de horas GAG (ou horas de voo) atÈ a falha
+Number_of_Cycles_to_Fail_Painel_Inteiro = real(1/D_Painel_Inteiro); %N√∫mero de Ciclos GAG (ou Voos) at√© a falha
+Hours_to_Fail_Painel_Inteiro = real(Number_of_Cycles_to_Fail_Painel_Inteiro * Horas_Voo); %Quantidade de horas GAG (ou horas de voo) at√© a falha
 %
 fprintf('\t -------------------------------------------------------------')
 fprintf('\n')
-fprintf('\t\t\t .::. Vida ⁄til dos PainÈis .::.')
+fprintf('\t\t\t .::. Vida √ötil dos Pain√©is .::.')
 fprintf('\n')
 fprintf('\t\t\t\t\t\t    .')
 fprintf('\n')
@@ -171,7 +171,7 @@ fprintf('>> Painel Inteiro:')
 fprintf('\n')
 fprintf('\n')
 disp(Number_of_Cycles_to_Fail_Painel_Inteiro);
-fprintf('(Ciclos GAG | VÙos)')
+fprintf('(Ciclos GAG | V√¥os)')
 fprintf('\n')
 fprintf('\n')
 fprintf('. . . . . . . . . . . . .')
@@ -186,23 +186,23 @@ fprintf('(Horas)')
 fprintf('\n')
 %
 % ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
-%Painel AlÌvio Circular:
-Kt_Circular = 3; %Fator de ConcentraÁ„o de Tens„o (Kt ~3)
+%Painel Al√≠vio Circular:
+Kt_Circular = 3; %Fator de Concentra√ß√£o de Tens√£o (Kt ~3)
 Nf_Painel_Circular = 10 .^ (11.1 - (3.97.*log10((Kt_Circular.*Sigma_eq_SWT_Array_Remastered) - 15.8)) ); %Curva S Vs. log(N): Al 2024-T3
-N_Nf_Painel_Circular = N_Remastered./Nf_Painel_Circular; %Raz„o N/Nf Palmgren Miner
+N_Nf_Painel_Circular = N_Remastered./Nf_Painel_Circular; %Raz√£o N/Nf Palmgren Miner
 %
 D_Painel_Circular = sum(N_Nf_Painel_Circular);
-Number_of_Cycles_to_Fail_Painel_Circular = real(1/D_Painel_Circular); %N˙mero de Ciclos GAG (ou Voos) atÈ a falha
-Hours_to_Fail_Painel_Circular = real(Number_of_Cycles_to_Fail_Painel_Circular * Horas_Voo); %Quantidade de horas GAG (ou horas de voo) atÈ a falha
+Number_of_Cycles_to_Fail_Painel_Circular = real(1/D_Painel_Circular); %N√∫mero de Ciclos GAG (ou Voos) at√© a falha
+Hours_to_Fail_Painel_Circular = real(Number_of_Cycles_to_Fail_Painel_Circular * Horas_Voo); %Quantidade de horas GAG (ou horas de voo) at√© a falha
 %
 fprintf('\n')
 fprintf('\t //////////')
 fprintf('\n')
-fprintf('>> Painel AlÌvio Circular:')
+fprintf('>> Painel Al√≠vio Circular:')
 fprintf('\n')
 fprintf('\n')
 disp(Number_of_Cycles_to_Fail_Painel_Circular);
-fprintf('(Ciclos GAG | VÙos)')
+fprintf('(Ciclos GAG | V√¥os)')
 fprintf('\n')
 fprintf('\n')
 fprintf('. . . . . . . . . . . . .')
@@ -217,23 +217,23 @@ fprintf('(Horas)')
 fprintf('\n')
 %
 % ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
-%Painel AlÌvio Quadrado:
-Kt_Quadrado = 7; %Fator de ConcentraÁ„o de Tens„o (Kt 6~8)
+%Painel Al√≠vio Quadrado:
+Kt_Quadrado = 7; %Fator de Concentra√ß√£o de Tens√£o (Kt 6~8)
 Nf_Painel_Quadrado = 10 .^ (11.1 - (3.97.*log10((Kt_Quadrado.*Sigma_eq_SWT_Array_Remastered) - 15.8)) ); %Curva S Vs. log(N): Al 2024-T3
-N_Nf_Painel_Quadrado = N_Remastered./Nf_Painel_Quadrado; %Raz„o N/Nf Palmgren Miner
+N_Nf_Painel_Quadrado = N_Remastered./Nf_Painel_Quadrado; %Raz√£o N/Nf Palmgren Miner
 %
 D_Painel_Quadrado = sum(N_Nf_Painel_Quadrado);
-Number_of_Cycles_to_Fail_Painel_Quadrado = real(1/D_Painel_Quadrado); %N˙mero de Ciclos GAG (ou Voos) atÈ a falha
-Hours_to_Fail_Painel_Quadrado = real(Number_of_Cycles_to_Fail_Painel_Quadrado * Horas_Voo); %Quantidade de horas GAG (ou horas de voo) atÈ a falha
+Number_of_Cycles_to_Fail_Painel_Quadrado = real(1/D_Painel_Quadrado); %N√∫mero de Ciclos GAG (ou Voos) at√© a falha
+Hours_to_Fail_Painel_Quadrado = real(Number_of_Cycles_to_Fail_Painel_Quadrado * Horas_Voo); %Quantidade de horas GAG (ou horas de voo) at√© a falha
 %
 fprintf('\n')
 fprintf('\t //////////')
 fprintf('\n')
-fprintf('>> Painel AlÌvio Quadrado:')
+fprintf('>> Painel Al√≠vio Quadrado:')
 fprintf('\n')
 fprintf('\n')
 disp(Number_of_Cycles_to_Fail_Painel_Quadrado);
-fprintf('(Ciclos GAG | VÙos)')
+fprintf('(Ciclos GAG | V√¥os)')
 fprintf('\n')
 fprintf('\n')
 fprintf('. . . . . . . . . . . . .')
