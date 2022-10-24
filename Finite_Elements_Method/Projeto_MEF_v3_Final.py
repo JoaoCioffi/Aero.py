@@ -196,7 +196,6 @@ boundary = (
     ((num+1)*12, 2, 0.)
     ) #-> contorno(numero_do_no, numero_de_GL_do_no, valor_da_condicao_de_contorno)
 
-
 #%%
 
 # Forças aplicadas: (0 - GDL para lado, 1 - GDL para cima, 2 - GDL para rotação)
@@ -372,8 +371,6 @@ for i in elements:
     
     axis.plot((nodes[int(i[1])][1] + scale*Phi[mode][3*int(i[1])], nodes[int(i[2])][1] + scale*Phi[mode][3*int(i[2])]),(nodes[int(i[1])][2] + scale*Phi[mode][3*int(i[1])+1], nodes[int(i[2])][2] + scale*Phi[mode][3*int(i[2])+1]),'r-')
 
-
-    
 plt.axis('equal')
 
 #%%
