@@ -372,5 +372,3 @@ for i in elements:
     axis.plot((nodes[int(i[1])][1] + scale*Phi[mode][3*int(i[1])], nodes[int(i[2])][1] + scale*Phi[mode][3*int(i[2])]),(nodes[int(i[1])][2] + scale*Phi[mode][3*int(i[1])+1], nodes[int(i[2])][2] + scale*Phi[mode][3*int(i[2])+1]),'r-')
 
 plt.axis('equal')
-
-#%%
