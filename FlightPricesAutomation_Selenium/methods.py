@@ -61,7 +61,6 @@ class Booking():
             )
         arrFirstResult.click()
 
-
     # ---// UNDER DEVELOPMENT //--- #
     """
     def searchCalendar(self,departureDate,arrivalDate):
