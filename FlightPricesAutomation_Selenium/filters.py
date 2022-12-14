@@ -19,3 +19,4 @@ class Filters:
                 'li[class="css-swohae epwz15m3"'
             )
             print(airlines.text)
+           
