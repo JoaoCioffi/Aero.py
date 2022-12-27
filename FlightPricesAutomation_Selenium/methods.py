@@ -142,7 +142,6 @@ class Booking():
                 ).text).split()[0])
             print(f'\n>> Showing {countFilteredResults} results.\n')
             
-            
     def __exit__(self):
         if self.driver.teardown:
             self.driver.quit()
