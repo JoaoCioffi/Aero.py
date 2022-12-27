@@ -43,7 +43,6 @@ class Booking():
             )
         depLocationFirstResult.click()
 
-    
     def selectArrival(self,arrivalLocation):
         searchField = self.driver.find_element(
             By.ID,
