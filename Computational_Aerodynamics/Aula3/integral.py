@@ -12,7 +12,6 @@ print(x)
 f = x**2/4 + npy.cos(2*npy.pi*x)
 intf = L**3/12 - npy.sin(2*npy.pi*L)/2*npy.pi+ npy.sin(0)
 
-
 soma = fn.trapezio(f,x)
 
 plt.plot(x,f)
