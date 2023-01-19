@@ -33,7 +33,6 @@ def colunas(name,columns,skip):
   return var
 
 
-
 # rotina de leitura dos dados
 def linhas(name,skip):
 
